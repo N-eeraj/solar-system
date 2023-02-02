@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { CelestialObject } from './CelestialObject'
 
 import data from './data'
+import saturnRing from '/assets/saturn-ring.png'
 
 
 // functions
@@ -66,7 +67,7 @@ scene.add(jupiter.origin)
 // saturn
 const saturn = CelestialObject(data['saturn'])
 const ringGeometry = new THREE.RingGeometry(18, 24, 32)
-const ringTexture = new THREE.TextureLoader().load('/assets/saturn-ring.png')
+const ringTexture = new THREE.TextureLoader().load(saturnRing)
 const ringMaterial = new THREE.MeshBasicMaterial({ map: ringTexture, side: THREE.DoubleSide })
 saturn.ring = new THREE.Mesh(ringGeometry, ringMaterial)
 saturn.ring.rotateX(1.5708)
