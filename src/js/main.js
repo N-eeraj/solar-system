@@ -65,6 +65,12 @@ scene.add(jupiter.origin)
 
 // saturn
 const saturn = CelestialObject(data['saturn'])
+const ringGeometry = new THREE.RingGeometry(18, 24, 32)
+const ringTexture = new THREE.TextureLoader().load('/assets/saturn-ring.png')
+const ringMaterial = new THREE.MeshBasicMaterial({ map: ringTexture, side: THREE.DoubleSide })
+saturn.ring = new THREE.Mesh(ringGeometry, ringMaterial)
+saturn.ring.rotateX(1.5708)
+saturn.add(saturn.ring)
 scene.add(saturn.origin)
 
 // uranus
@@ -103,6 +109,7 @@ for (let i=0; i<200; i++) {
   jupiter.rotateY(0.07)
   saturn.origin.rotateY(0.0005)
   saturn.rotateY(0.064)
+  saturn.ring.rotateZ(0.06)
   uranus.origin.rotateY(0.0002)
   uranus.rotateY(0.04)
   neptune.origin.rotateY(0.0001)
