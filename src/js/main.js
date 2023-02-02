@@ -25,7 +25,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.pixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 
-const light = new THREE.PointLight(0xffa, 10, 500)
+const light = new THREE.PointLight(0xFFFFAA, 3, 1000)
 scene.add(light)
 
 const control = new OrbitControls(camera, renderer.domElement)
@@ -34,69 +34,69 @@ const control = new OrbitControls(camera, renderer.domElement)
 // textures
 
 // sun
-const sun = CelestialObject(100, '/assets/sun.jpg')
+const sun = CelestialObject(100, '/assets/sun.jpg', true)
 scene.add(sun)
 
 // mercury
 const mercury = CelestialObject(1.14, '/assets/mercury.jpg')
-const mercuryOrigin = new THREE.Object3D()
+mercury.origin = new THREE.Object3D()
 mercury.position.set(120, 4, 7)
-mercuryOrigin.add(mercury)
-scene.add(mercuryOrigin)
+mercury.origin.add(mercury)
+scene.add(mercury.origin)
 
 // venus
 const venus = CelestialObject(2.8, '/assets/venus.jpg')
-const venusOrigin = new THREE.Object3D()
+venus.origin = new THREE.Object3D()
 venus.position.set(160, 4, 7)
-venusOrigin.add(venus)
-scene.add(venusOrigin)
+venus.origin.add(venus)
+scene.add(venus.origin)
 
 // earth
 const earth = CelestialObject(3, '/assets/earth.jpg')
-const earthOrigin = new THREE.Object3D()
+earth.origin = new THREE.Object3D()
 earth.position.set(200, 4, 7)
-earthOrigin.add(earth)
-scene.add(earthOrigin)
+earth.origin.add(earth)
+scene.add(earth.origin)
 
 // moon
 const moon = CelestialObject(1, '/assets/moon.jpg')
-moon.position.set(3, 3, 3)
+moon.position.set(4, 0, 4)
 earth.add(moon)
 
 // mars
 const mars = CelestialObject(1.6, '/assets/mars.jpg')
-const marsOrigin = new THREE.Object3D()
+mars.origin = new THREE.Object3D()
 mars.position.set(250, 4, 7)
-marsOrigin.add(mars)
-scene.add(marsOrigin)
+mars.origin.add(mars)
+scene.add(mars.origin)
 
 // jupiter
 const jupiter = CelestialObject(25, '/assets/jupiter.jpg')
-const jupiterOrigin = new THREE.Object3D()
+jupiter.origin = new THREE.Object3D()
 jupiter.position.set(360, 4, 7)
-jupiterOrigin.add(jupiter)
-scene.add(jupiterOrigin)
+jupiter.origin.add(jupiter)
+scene.add(jupiter.origin)
 
 // saturn
 const saturn = CelestialObject(15, '/assets/saturn.jpg')
-const saturnOrigin = new THREE.Object3D()
+saturn.origin = new THREE.Object3D()
 saturn.position.set(450, 4, 7)
-saturnOrigin.add(saturn)
-scene.add(saturnOrigin)
+saturn.origin.add(saturn)
+scene.add(saturn.origin)
 
 // uranus
 const uranus = CelestialObject(7.3, '/assets/uranus.jpg')
-const uranusOrigin = new THREE.Object3D()
+uranus.origin = new THREE.Object3D()
 uranus.position.set(520, 4, 7)
-uranusOrigin.add(uranus)
-scene.add(uranusOrigin)
+uranus.origin.add(uranus)
+scene.add(uranus.origin)
 
 // neptune
 const neptune = CelestialObject(7, '/assets/neptune.jpg')
-const neptuneOrigin = new THREE.Object3D()
+neptune.origin = new THREE.Object3D()
 neptune.position.set(600, 4, 7)
-neptuneOrigin.add(neptune)
-scene.add(neptuneOrigin)
+neptune.origin.add(neptune)
+scene.add(neptune.origin)
 
 
 // stars
@@ -114,13 +114,21 @@ for (let i=0; i<200; i++) {
   requestAnimationFrame(animate)
   control.update()
   sun.rotateY(0.0005)
-  mercuryOrigin.rotateY(0.016)
-  venusOrigin.rotateY(0.0065)
-  earthOrigin.rotateY(0.004)
-  marsOrigin.rotateY(0.008)
-  jupiterOrigin.rotateY(0.0013)
-  saturnOrigin.rotateY(0.0005)
-  uranusOrigin.rotateY(0.0002)
-  neptuneOrigin.rotateY(0.0001)
+  mercury.origin.rotateY(0.016)
+  mercury.rotateY(0.0004)
+  venus.origin.rotateY(0.0065)
+  venus.rotateY(0.0001)
+  earth.origin.rotateY(0.004)
+  earth.rotateY(0.029)
+  mars.origin.rotateY(0.008)
+  mars.rotateY(0.028)
+  jupiter.origin.rotateY(0.0013)
+  jupiter.rotateY(0.07)
+  saturn.origin.rotateY(0.0005)
+  saturn.rotateY(0.064)
+  uranus.origin.rotateY(0.0002)
+  uranus.rotateY(0.04)
+  neptune.origin.rotateY(0.0001)
+  neptune.rotateY(0.043)
   renderer.render(scene, camera)
 })()
