@@ -116,3 +116,23 @@ for (let i=0; i<200; i++) {
   neptune.rotateY(0.043)
   renderer.render(scene, camera)
 })()
+
+
+document.addEventListener('keydown', (event) => {
+  switch(event.key) {
+    case 'ArrowDown':
+      if (camera.position.z < 700)
+        camera.translateZ(10)
+      break
+    case 'ArrowUp':
+      if (camera.position.z > 130)
+        camera.translateZ(-10)
+      break
+    case 'ArrowLeft':
+      camera.translateX(10)
+      break
+    case 'ArrowRight':
+      camera.translateX(-10)
+      break
+  }
+})
