@@ -1,12 +1,23 @@
+// imports
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import { CelestialObject } from './CelestialObject'
 
+
+// functions
+const randomPosition = () => {
+  let position = Math.random() * 7000 * (Math.random() < 0.5 ? -1 : 1)
+  position += (position > 0 ? 5000 : -5000) * Math.random()
+  return position
+}
+
+
+// Three JS setup
 const scene = new THREE.Scene()
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-camera.position.setZ(25)
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100000)
+camera.position.setZ(500)
 
 const renderer = new THREE.WebGLRenderer({
   canvas: document.getElementById('bg')
@@ -14,23 +25,82 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.pixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 
-const light = new THREE.PointLight(0xfff)
-light.position.set(20, 20, 10)
+const light = new THREE.PointLight(0xffa, 10, 500)
 scene.add(light)
 
 const control = new OrbitControls(camera, renderer.domElement)
 
-const earth = CelestialObject(5, '/assets/earth.jpg')
-earth.rotateX(-0.01)
-scene.add(earth)
 
-const moon = CelestialObject(1.5, '/assets/moon.jpg')
-moon.position.set(7, 4, 7)
+// textures
+
+// sun
+const sun = CelestialObject(100, '/assets/sun.jpg')
+scene.add(sun)
+
+// mercury
+const mercury = CelestialObject(1.14, '/assets/mercury.jpg')
+const mercuryOrigin = new THREE.Object3D()
+mercury.position.set(120, 4, 7)
+mercuryOrigin.add(mercury)
+scene.add(mercuryOrigin)
+
+// venus
+const venus = CelestialObject(2.8, '/assets/venus.jpg')
+const venusOrigin = new THREE.Object3D()
+venus.position.set(160, 4, 7)
+venusOrigin.add(venus)
+scene.add(venusOrigin)
+
+// earth
+const earth = CelestialObject(3, '/assets/earth.jpg')
+const earthOrigin = new THREE.Object3D()
+earth.position.set(200, 4, 7)
+earthOrigin.add(earth)
+scene.add(earthOrigin)
+
+// moon
+const moon = CelestialObject(1, '/assets/moon.jpg')
+moon.position.set(3, 3, 3)
 earth.add(moon)
 
-const randomPosition = () => Math.random() * 1000 * (Math.random() < 0.5 ? -1 : 1)
+// mars
+const mars = CelestialObject(1.6, '/assets/mars.jpg')
+const marsOrigin = new THREE.Object3D()
+mars.position.set(250, 4, 7)
+marsOrigin.add(mars)
+scene.add(marsOrigin)
 
-const starGeometry = new THREE.SphereGeometry(1, 3, 3)
+// jupiter
+const jupiter = CelestialObject(25, '/assets/jupiter.jpg')
+const jupiterOrigin = new THREE.Object3D()
+jupiter.position.set(360, 4, 7)
+jupiterOrigin.add(jupiter)
+scene.add(jupiterOrigin)
+
+// saturn
+const saturn = CelestialObject(15, '/assets/saturn.jpg')
+const saturnOrigin = new THREE.Object3D()
+saturn.position.set(450, 4, 7)
+saturnOrigin.add(saturn)
+scene.add(saturnOrigin)
+
+// uranus
+const uranus = CelestialObject(7.3, '/assets/uranus.jpg')
+const uranusOrigin = new THREE.Object3D()
+uranus.position.set(520, 4, 7)
+uranusOrigin.add(uranus)
+scene.add(uranusOrigin)
+
+// neptune
+const neptune = CelestialObject(7, '/assets/neptune.jpg')
+const neptuneOrigin = new THREE.Object3D()
+neptune.position.set(600, 4, 7)
+neptuneOrigin.add(neptune)
+scene.add(neptuneOrigin)
+
+
+// stars
+const starGeometry = new THREE.SphereGeometry(20, 3, 3)
 const starMaterial = new THREE.MeshBasicMaterial({ color: 'white' })
 for (let i=0; i<200; i++) {
   const star = new THREE.Mesh(starGeometry, starMaterial)
@@ -38,10 +108,10 @@ for (let i=0; i<200; i++) {
   scene.add(star)
 }
 
+
+// animate
 (function animate() {
   requestAnimationFrame(animate)
-  earth.rotateY(0.005)
-  moon.rotateY(0.005)
   control.update()
   renderer.render(scene, camera)
 })()
