@@ -4,6 +4,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import { CelestialObject } from './CelestialObject'
 
+import data from './data'
+
 
 // functions
 const randomPosition = () => {
@@ -25,7 +27,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.pixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 
-const light = new THREE.PointLight(0xFFFFAA, 3, 1000)
+const light = new THREE.PointLight(0xFFDD99, 3, 1000)
 scene.add(light)
 
 const control = new OrbitControls(camera, renderer.domElement)
@@ -34,68 +36,43 @@ const control = new OrbitControls(camera, renderer.domElement)
 // textures
 
 // sun
-const sun = CelestialObject(100, '/assets/sun.jpg', true)
+const sun = CelestialObject(data['sun'], true)
 scene.add(sun)
 
 // mercury
-const mercury = CelestialObject(1.14, '/assets/mercury.jpg')
-mercury.origin = new THREE.Object3D()
-mercury.position.set(120, 4, 7)
-mercury.origin.add(mercury)
+const mercury = CelestialObject(data['mercury'])
 scene.add(mercury.origin)
 
 // venus
-const venus = CelestialObject(2.8, '/assets/venus.jpg')
-venus.origin = new THREE.Object3D()
-venus.position.set(160, 4, 7)
-venus.origin.add(venus)
+const venus = CelestialObject(data['venus'])
 scene.add(venus.origin)
 
 // earth
-const earth = CelestialObject(3, '/assets/earth.jpg')
-earth.origin = new THREE.Object3D()
-earth.position.set(200, 4, 7)
-earth.origin.add(earth)
+const earth = CelestialObject(data['earth'])
 scene.add(earth.origin)
 
 // moon
-const moon = CelestialObject(1, '/assets/moon.jpg')
-moon.position.set(4, 0, 4)
+const moon = CelestialObject(data['moon'])
 earth.add(moon)
 
 // mars
-const mars = CelestialObject(1.6, '/assets/mars.jpg')
-mars.origin = new THREE.Object3D()
-mars.position.set(250, 4, 7)
-mars.origin.add(mars)
+const mars = CelestialObject(data['mars'])
 scene.add(mars.origin)
 
 // jupiter
-const jupiter = CelestialObject(25, '/assets/jupiter.jpg')
-jupiter.origin = new THREE.Object3D()
-jupiter.position.set(360, 4, 7)
-jupiter.origin.add(jupiter)
+const jupiter = CelestialObject(data['jupiter'])
 scene.add(jupiter.origin)
 
 // saturn
-const saturn = CelestialObject(15, '/assets/saturn.jpg')
-saturn.origin = new THREE.Object3D()
-saturn.position.set(450, 4, 7)
-saturn.origin.add(saturn)
+const saturn = CelestialObject(data['saturn'])
 scene.add(saturn.origin)
 
 // uranus
-const uranus = CelestialObject(7.3, '/assets/uranus.jpg')
-uranus.origin = new THREE.Object3D()
-uranus.position.set(520, 4, 7)
-uranus.origin.add(uranus)
+const uranus = CelestialObject(data['uranus'])
 scene.add(uranus.origin)
 
 // neptune
-const neptune = CelestialObject(7, '/assets/neptune.jpg')
-neptune.origin = new THREE.Object3D()
-neptune.position.set(600, 4, 7)
-neptune.origin.add(neptune)
+const neptune = CelestialObject(data['neptune'])
 scene.add(neptune.origin)
 
 
