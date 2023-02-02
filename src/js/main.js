@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
+import { CelestialObject } from './CelestialObject'
+
 const scene = new THREE.Scene()
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
@@ -18,19 +20,13 @@ scene.add(light)
 
 const control = new OrbitControls(camera, renderer.domElement)
 
-const earthGeometry = new THREE.SphereGeometry(5, 64, 32)
-const earthTexture = new THREE.TextureLoader().load('/assets/earth.jpg')
-const earthMaterial = new THREE.MeshBasicMaterial({ map: earthTexture })
-const earth = new THREE.Mesh(earthGeometry, earthMaterial)
+const earth = CelestialObject(5, '/assets/earth.jpg')
 earth.rotateX(-0.01)
 scene.add(earth)
 
-const moonGeometry = new THREE.SphereGeometry(1.5, 64, 32)
-const moonTexture = new THREE.TextureLoader().load('/assets/moon.jpg')
-const moonMaterial = new THREE.MeshBasicMaterial({ map: moonTexture })
-const moon = new THREE.Mesh(moonGeometry, moonMaterial)
+const moon = CelestialObject(1.5, '/assets/moon.jpg')
 moon.position.set(7, 4, 7)
-scene.add(moon)
+earth.add(moon)
 
 const randomPosition = () => Math.random() * 1000 * (Math.random() < 0.5 ? -1 : 1)
 
